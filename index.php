@@ -1,12 +1,16 @@
 <?php
 declare(strict_types=1);
 header('Content-Type: text/html; charset=UTF-8');
-$DATA = json_decode((string)file_get_contents(__DIR__ . '/content.json'), true);
-if (!is_array($DATA)) {
+$ALL_DATA = json_decode((string)file_get_contents(__DIR__ . '/content.json'), true);
+if (!is_array($ALL_DATA)) {
     http_response_code(500);
     echo 'content.json ilegível';
     exit;
 }
+
+$lang = isset($_COOKIE['monolog_lang']) && $_COOKIE['monolog_lang'] === 'en' ? 'en' : 'pt';
+$DATA = $lang === 'en' && isset($ALL_DATA['en']) ? $ALL_DATA['en'] : $ALL_DATA;
+
 function e(?string $s): string {
     return htmlspecialchars((string)$s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
@@ -29,7 +33,7 @@ $canon = 'https://monolog.danielpro.dev/';
 $features = ['home','entries','tasks','habits','calendar','starred','archive','quotes','import','folders'];
 $proofs = ['offline','aes','windows','account'];
 ?><!DOCTYPE html>
-<html lang="pt">
+<html lang="<?= $lang ?>" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,6 +75,16 @@ $proofs = ['offline','aes','windows','account'];
       <a href="#sobre"><?= e(t($DATA,'nav.link_about')) ?></a>
       <a class="btn" href="#descarregar"><?= e(t($DATA,'nav.cta')) ?></a>
     </nav>
+    <div class="toggles">
+      <button class="toggle-theme" id="themeToggle" type="button" aria-label="Toggle theme">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="toggle-lang" id="langToggle" type="button" aria-label="Toggle language">
+        <span class="lang-pt">PT</span>
+        <span class="lang-en">EN</span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -244,5 +258,32 @@ $proofs = ['offline','aes','windows','account'];
     <p class="foot-meta"><?= e(t($DATA,'footer.url')) ?></p>
   </div>
 </footer>
+<script>
+(function() {
+  const html = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+  const langToggle = document.getElementById('langToggle');
+  
+  const savedTheme = localStorage.getItem('monolog_theme') || 'light';
+  const savedLang = localStorage.getItem('monolog_lang') || 'pt';
+  
+  html.setAttribute('data-theme', savedTheme);
+  html.setAttribute('lang', savedLang);
+  
+  themeToggle.addEventListener('click', function() {
+    const current = html.getAttribute('data-theme');
+    const next = current === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('monolog_theme', next);
+  });
+  
+  langToggle.addEventListener('click', function() {
+    const current = html.getAttribute('lang');
+    const next = current === 'pt' ? 'en' : 'pt';
+    document.cookie = 'monolog_lang=' + next + '; path=/; max-age=31536000; SameSite=Lax';
+    location.reload();
+  });
+})();
+</script>
 </body>
 </html>
