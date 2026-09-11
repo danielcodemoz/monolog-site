@@ -1,0 +1,32 @@
+DirectoryIndex index.php
+Options -Indexes
+
+<Files "editor-secret.php">
+  Require all denied
+</Files>
+<Files ".user.ini">
+  Require all denied
+</Files>
+<Files "nginx-deny-snippet.conf">
+  Require all denied
+</Files>
+<FilesMatch "^(\.htaccess|EDITOR-PASSWORD\.txt)$">
+  Require all denied
+</FilesMatch>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(webp|png|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.css$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>
