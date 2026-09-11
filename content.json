@@ -148,5 +148,131 @@
     "p3": "Se quiseres o programa, descarregas. O resto do portefólio está em danielpro.dev.",
     "cta": "Ver o portefólio",
     "cta_href": "https://danielpro.dev"
+  },
+  "en": {
+    "meta": {
+      "title": "Monolog — your journal, only on your computer",
+      "description": "Local diary for Windows. Offline, no account, no cloud. AES vault. Your words stay on disk — not on anyone's internet.",
+      "og_title": "Monolog — local journal for Windows",
+      "og_description": "Write offline. Lock with AES. No account, no cloud, no app reading you."
+    },
+    "nav": {
+      "brand": "Monolog",
+      "brand_sub": "Journal",
+      "link_shots": "The app",
+      "link_features": "What it does",
+      "link_why": "Why offline",
+      "cta": "Download",
+      "skip": "Skip to content",
+      "link_about": "About"
+    },
+    "hero": {
+      "kicker": "Journal for Windows · local · no account",
+      "title": "Your journal.",
+      "title_em": "Only on your computer.",
+      "lead": "Monolog is a diary for Windows that never asks for an account, never connects to the cloud, and never sends your pages anywhere. You write. The disk saves. The AES vault locks. Done.",
+      "cta": "Download for Windows",
+      "cta_href": "/download/Monolog-1.0.0-setup.exe",
+      "cta_note": "Monolog-1.0.0-setup.exe · portable version also available",
+      "scroll": "See the app"
+    },
+    "proof": {
+      "offline_label": "Offline",
+      "offline_text": "Works without Wi-Fi. Always. The network is not invited.",
+      "aes_label": "AES Vault",
+      "aes_text": "Your password. Your disk. Nobody has the key.",
+      "windows_label": "Windows",
+      "windows_text": "Program on your computer. Not a website with login.",
+      "account_label": "No account",
+      "account_text": "You don't register. We don't track you. There is no server.",
+      "aria": "Why Monolog"
+    },
+    "shots": {
+      "kicker": "The actual app, not an invented mockup",
+      "title": "You open. You write. You close.",
+      "lead": "Real screens from Monolog. Without your sentences on display — just the home where they live.",
+      "home_caption": "Home — the calm view: notes, sequence, moods. Without your pages on show.",
+      "vault_caption": "Vault — the locked journal. Master password or PIN. Everything else stays paper.",
+      "calendar_caption": "Mood calendar — the month in squares. Only the day's climate, without the text from your nights.",
+      "settings_caption": "Settings — language, paper theme, shortcuts. The program is yours, on your PC.",
+      "quotes_caption": "Quotes — a place for sentences. The ones you see here are from Monolog itself, not from your notebook.",
+      "tasks_caption": "Tasks — today's list, focus timer, empty and waiting. Without the names of your folders."
+    },
+    "features": {
+      "kicker": "What's inside",
+      "title": "A notebook with drawers. Without the drawer being in the cloud.",
+      "lead": "This isn't a solutions list. These are the rooms of the program, with the names you see in the bar.",
+      "home_title": "Home",
+      "home_text": "The day's summary: how many notes, the writing sequence, the month's moods. And buttons to write, import, open tasks or habits.",
+      "entries_title": "All entries",
+      "entries_text": "The diary itself. Folders on the left, tags at the bottom. Drag a note to a folder and it stays organized.",
+      "tasks_title": "Tasks",
+      "tasks_text": "Lists in the same place where you write. No extra app, no Trello account, no board on the internet.",
+      "habits_title": "Habits",
+      "habits_text": "What you want to repeat. You check on your own computer, not on a website sending you notifications at 6 in the morning.",
+      "calendar_title": "Calendar / Moods",
+      "calendar_text": "How the month sat in your body. One square per day. Nobody sees the map — it's on disk.",
+      "starred_title": "Starred",
+      "starred_text": "The pages you don't want to lose among the others. One star, and they're at hand.",
+      "archive_title": "Archive",
+      "archive_text": "What's no longer from today, but still yours. You don't delete old life just to keep the screen clean.",
+      "quotes_title": "Quotes",
+      "quotes_text": "Sentences you want to keep. From a book, from someone, from you on a better day.",
+      "import_title": "Import TXT and Markdown",
+      "import_text": "Bring old notes from a file. Without connecting Google Drive. A document on disk is enough.",
+      "folders_title": "Folders and tags",
+      "folders_text": "Organize your way. Health, ideas, whatever you want — the tags are yours, not product taxonomy."
+    },
+    "why": {
+      "kicker": "Manifesto",
+      "title": "Because offline. Because only on the computer.",
+      "p1": "A diary on the internet is a notebook with photocopies on someone else's desk. Even encrypted. Even private. Someone has the building. Someone has the account. Someone can change the rules tomorrow.",
+      "p2": "Monolog has no building. There's no company keeping your nights. There's no sync. There's your Windows, a database on disk (SQLite), and an AES lock when you want to secure it. If the net drops, the journal doesn't drop — because it was never there.",
+      "p3": "You install. You open. You write on the plane, in the field, with data off. You close. Nobody emails you saying you haven't opened the app in seven days. That's not a product delay. That's the point.",
+      "vault_title": "The vault is a lock. Not a slogan.",
+      "vault_text": "AES on your own computer. Master password or PIN. Minimized stays at hand; the lock button secures now. No key travels.",
+      "offline_title": "Unplug the cable. The journal stays.",
+      "offline_text": "No Wi-Fi, no account, no our cloud. A desktop program. Your pages don't need a cell tower to exist."
+    },
+    "download": {
+      "kicker": "Windows 10 and 11",
+      "title": "Take the notebook to disk.",
+      "lead": "Classic installer. No user creation. No card. You open setup, and the journal becomes a folder on your computer — not a place on the internet.",
+      "cta": "Download Monolog 1.0",
+      "cta_href": "/download/Monolog-1.0.0-setup.exe",
+      "file": "Monolog-1.0.0-setup.exe",
+      "note": "Portable version also exists: the journal goes on the pen drive, if needed.",
+      "reqs": "Windows. No account. No cloud. No permission to a server."
+    },
+    "footer": {
+      "brand": "Monolog",
+      "tag": "Journal",
+      "line": "Local diary for Windows. The words stay where you wrote them.",
+      "credit": "A computer program. Not a service.",
+      "url": "monolog.danielpro.dev"
+    },
+    "alts": {
+      "hero": "Wooden desk with lamp, notebook and a laptop open on Monolog — the screen shows the Home panel, without diary text.",
+      "icon": "Monolog icon: open notebook and pen, in cream, teal and brown.",
+      "home": "Monolog Home panel: sidebar, note cards and shortcuts. No recent notes visible.",
+      "vault": "Monolog lock screen: Monolog is locked, master password field.",
+      "calendar": "Monolog mood calendar in August, with mood icons on the last days of the month.",
+      "settings": "Monolog settings window over calendar: language, paper theme, shortcuts.",
+      "vault3d": "Cream leather notebook closed with brass padlock on old paper.",
+      "offline3d": "Desk with local computer, network cable unplugged and Wi-Fi symbol crossed out.",
+      "quotes": "Monolog quotes screen: field for sentence and author, list of example quotes from the program.",
+      "tasks": "Monolog tasks screen: sidebar, timer 25:00, empty today list."
+    },
+    "about": {
+      "kicker": "About",
+      "title": "Made by one person. Not by a platform.",
+      "name": "Daniel Marcos",
+      "role": "IT Consultant · Maputo",
+      "p1": "My name is Daniel Marcos. I work with school systems at Colégio Educare, in Maputo, and I build programs that stay on the computer of those who use them — not on a server keeping a copy of anyone's life.",
+      "p2": "Monolog was born from the simple idea of a journal that nobody else reads. No account. No cloud. Without me having your nights. You install on Windows, and the notebook is yours.",
+      "p3": "If you want the program, you download it. The rest of the portfolio is at danielpro.dev.",
+      "cta": "View portfolio",
+      "cta_href": "https://danielpro.dev"
+    }
   }
 }
