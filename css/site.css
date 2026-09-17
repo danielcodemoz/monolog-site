@@ -9,7 +9,8 @@
   --gutter:clamp(1.6rem, 6.5vw, 4.75rem);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{overflow-x:hidden;max-width:100%}
 html,body{margin:0;padding:0}
 body{
   font-family:var(--sans);color:var(--ink);background:var(--cream);
@@ -119,4 +120,16 @@ footer .foot-line{flex:1;min-width:12rem}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .chrome,.shot:hover .chrome{transform:none;transition:none}
+}
+
+
+@media (max-width:900px){
+  .nav-in{gap:.6rem;min-height:3.6rem;flex-wrap:nowrap}
+  .nav-links{gap:.45rem}
+  .nav-links .btn{white-space:nowrap;padding:.55rem .9rem;font-size:.85rem}
+  .brand{min-width:0}
+  .brand span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:42vw}
+}
+@media (max-width:380px){
+  .nav-links .btn{padding:.5rem .7rem;font-size:.78rem}
 }
