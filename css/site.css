@@ -141,3 +141,24 @@ footer .foot-line{flex:1;min-width:12rem}
   .hero-copy{padding-inline:1.35rem}
   .cta-note,.scroll{padding-inline:0}
 }
+
+
+/* PT/EN toggle */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: inherit;
+}
+.lang-toggle .lang-en { opacity: 0.45; }
+.lang-toggle .lang-pt.active,
+.lang-toggle .lang-en.active { opacity: 1; }
+.lang-toggle .lang-divider { opacity: 0.4; margin: 0 0.15rem; }

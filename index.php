@@ -46,6 +46,7 @@ $proofs = ['offline','aes','windows','account'];
 <link rel="icon" href="/favicon.ico" sizes="any">
 
 <link rel="icon" href="/assets/favicon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch.png">
 <link rel="preload" href="/assets/fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/hero-3d.webp?v=2" as="image" fetchpriority="high">
@@ -65,11 +66,14 @@ $proofs = ['offline','aes','windows','account'];
       </span>
     </a>
     <nav class="nav-links" aria-label="<?= e(t($DATA,'nav.brand')) ?>">
-      <a href="#programa"><?= e(t($DATA,'nav.link_shots')) ?></a>
-      <a href="#funcionalidades"><?= e(t($DATA,'nav.link_features')) ?></a>
-      <a href="#porque"><?= e(t($DATA,'nav.link_why')) ?></a>
-      <a href="#sobre"><?= e(t($DATA,'nav.link_about')) ?></a>
-      <a class="btn" href="#descarregar"><?= e(t($DATA,'nav.cta')) ?></a>
+      <a href="#programa"><span data-en="The app"><?= e(t($DATA,'nav.link_shots')) ?></span></a>
+      <a href="#funcionalidades"><span data-en="Features"><?= e(t($DATA,'nav.link_features')) ?></span></a>
+      <a href="#porque"><span data-en="Why offline"><?= e(t($DATA,'nav.link_why')) ?></span></a>
+      <a href="#sobre"><span data-en="About"><?= e(t($DATA,'nav.link_about')) ?></span></a>
+      <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Toggle language">
+        <span class="lang-pt active">PT</span><span class="lang-divider">/</span><span class="lang-en">EN</span>
+      </button>
+      <a class="btn" href="#descarregar" data-en="Download"><?= e(t($DATA,'nav.cta')) ?></a>
     </nav>
   </div>
 </header>
@@ -79,14 +83,14 @@ $proofs = ['offline','aes','windows','account'];
     <img class="hero-img" src="/assets/hero-3d.webp?v=2" width="1536" height="1024" alt="<?= e(t($DATA,'alts.hero')) ?>" fetchpriority="high" decoding="async" sizes="100vw">
     <div class="hero-veil" aria-hidden="true"></div>
     <div class="wrap hero-copy">
-      <p class="hero-kicker"><?= e(t($DATA,'hero.kicker')) ?></p>
-      <h1><?= e(t($DATA,'hero.title')) ?><?php if (t($DATA,'hero.title_em') !== ''): ?> <em><?= e(t($DATA,'hero.title_em')) ?></em><?php endif; ?></h1>
+      <p class="hero-kicker"><span data-en="Journal for Windows · local · no account"><?= e(t($DATA,'hero.kicker')) ?></span></p>
+      <h1><span data-en="Your journal."><?= e(t($DATA,'hero.title')) ?></span><?php if (t($DATA,'hero.title_em') !== ''): ?> <em><span data-en="Only on your computer."><?= e(t($DATA,'hero.title_em')) ?></span></em><?php endif; ?></h1>
       <p class="lead"><?= p($DATA,'hero.lead') ?></p>
       <div class="hero-actions">
-        <a class="btn btn-lg" href="<?= e($dl) ?>"><?= e(t($DATA,'hero.cta')) ?></a>
-        <a class="scroll" href="#programa"><?= e(t($DATA,'hero.scroll')) ?></a>
+        <a class="btn btn-lg" href="<?= e($dl) ?>"><span data-en="Download for Windows"><?= e(t($DATA,'hero.cta')) ?></span></a>
+        <a class="scroll" href="#programa"><span data-en="See the app"><?= e(t($DATA,'hero.scroll')) ?></span></a>
       </div>
-      <p class="cta-note"><?= e(t($DATA,'hero.cta_note')) ?></p>
+      <p class="cta-note"><span data-en="Monolog-1.0.0-setup.exe · portable version also available"><?= e(t($DATA,'hero.cta_note')) ?></span></p>
     </div>
   </section>
 
@@ -94,8 +98,8 @@ $proofs = ['offline','aes','windows','account'];
     <div class="wrap proof-in">
 <?php foreach ($proofs as $k): ?>
     <article>
-      <h3><?= e(t($DATA,"proof.{$k}_label")) ?></h3>
-      <p><?= e(t($DATA,"proof.{$k}_text")) ?></p>
+      <h3><span data-en="<?= e(['offline'=>'Offline','aes'=>'AES Vault','windows'=>'Windows','account'=>'No account'][$k] ?? '') ?>"><?= e(t($DATA,"proof.{$k}_label")) ?></span></h3>
+      <p><span data-en="<?= e(['offline'=>'Works without Wi-Fi. Always. The network is not invited.','aes'=>'Your password. Your disk. Nobody else has the key.','windows'=>'A program on your computer. Not a website with a login.','account'=>'No signup. We do not track you. There is no server.'][$k] ?? '') ?>"><?= e(t($DATA,"proof.{$k}_text")) ?></span></p>
     </article>
 <?php endforeach; ?>
     </div>
@@ -103,8 +107,8 @@ $proofs = ['offline','aes','windows','account'];
 
   <section class="section" id="programa">
     <div class="wrap">
-      <p class="kicker"><?= e(t($DATA,'shots.kicker')) ?></p>
-      <h2><?= e(t($DATA,'shots.title')) ?></h2>
+      <p class="kicker"><span data-en="The real app — not a made-up mockup"><?= e(t($DATA,'shots.kicker')) ?></span></p>
+      <h2><span data-en="Open. Write. Close."><?= e(t($DATA,'shots.title')) ?></span></h2>
       <p class="lead"><?= p($DATA,'shots.lead') ?></p>
       <div class="shots-grid">
         <figure class="shot featured">
@@ -155,8 +159,8 @@ $proofs = ['offline','aes','windows','account'];
 
   <section class="section features" id="funcionalidades">
     <div class="wrap">
-      <p class="kicker"><?= e(t($DATA,'features.kicker')) ?></p>
-      <h2><?= e(t($DATA,'features.title')) ?></h2>
+      <p class="kicker"><span data-en="What's inside"><?= e(t($DATA,'features.kicker')) ?></span></p>
+      <h2><span data-en="A notebook with drawers. The drawer is not in the cloud."><?= e(t($DATA,'features.title')) ?></span></h2>
       <p class="lead"><?= p($DATA,'features.lead') ?></p>
       <div class="feat-grid">
 <?php foreach ($features as $k): ?>
@@ -171,8 +175,8 @@ $proofs = ['offline','aes','windows','account'];
 
   <section class="section" id="porque">
     <div class="wrap">
-      <p class="kicker"><?= e(t($DATA,'why.kicker')) ?></p>
-      <h2><?= e(t($DATA,'why.title')) ?></h2>
+      <p class="kicker"><span data-en="Manifesto"><?= e(t($DATA,'why.kicker')) ?></span></p>
+      <h2><span data-en="Why offline. Why only on your computer."><?= e(t($DATA,'why.title')) ?></span></h2>
       <div class="why-grid">
         <div class="why-copy">
           <p><?= p($DATA,'why.p1') ?></p>
@@ -222,13 +226,13 @@ $proofs = ['offline','aes','windows','account'];
 
   <section class="download" id="descarregar">
     <div class="wrap">
-      <p class="kicker"><?= e(t($DATA,'download.kicker')) ?></p>
-      <h2><?= e(t($DATA,'download.title')) ?></h2>
+      <p class="kicker"><span data-en="Windows 10 and 11"><?= e(t($DATA,'download.kicker')) ?></span></p>
+      <h2><span data-en="Take the notebook to disk."><?= e(t($DATA,'download.title')) ?></span></h2>
       <p class="lead"><?= p($DATA,'download.lead') ?></p>
-      <p><a class="btn btn-lg btn-ghost" href="<?= e($dl2) ?>"><?= e(t($DATA,'download.cta')) ?></a></p>
+      <p><a class="btn btn-lg btn-ghost" href="<?= e($dl2) ?>"><span data-en="Download Monolog 1.0"><?= e(t($DATA,'download.cta')) ?></span></a></p>
       <p class="file"><?= e(t($DATA,'download.file')) ?></p>
-      <p class="note"><?= e(t($DATA,'download.note')) ?></p>
-      <p class="note"><?= e(t($DATA,'download.reqs')) ?></p>
+      <p class="note"><span data-en="A portable version is also available: the journal can live on a USB stick."><?= e(t($DATA,'download.note')) ?></span></p>
+      <p class="note"><span data-en="Windows. No account. No cloud. No server permission."><?= e(t($DATA,'download.reqs')) ?></span></p>
     </div>
   </section>
 </main>
@@ -239,10 +243,34 @@ $proofs = ['offline','aes','windows','account'];
       <strong><?= e(t($DATA,'footer.brand')) ?></strong>
       <span class="tag"><?= e(t($DATA,'footer.tag')) ?></span>
     </div>
-    <p class="foot-line"><?= e(t($DATA,'footer.line')) ?></p>
-    <p class="foot-meta"><?= e(t($DATA,'footer.credit')) ?></p>
+    <p class="foot-line"><span data-en="Local journal for Windows. Your words stay where you wrote them."><?= e(t($DATA,'footer.line')) ?></span></p>
+    <p class="foot-meta"><span data-en="A desktop program. Not a service."><?= e(t($DATA,'footer.credit')) ?></span></p>
     <p class="foot-meta"><?= e(t($DATA,'footer.url')) ?></p>
   </div>
 </footer>
+
+<script>
+(function () {
+  var toggle = document.getElementById('lang-toggle');
+  if (!toggle) return;
+  var ptBtn = toggle.querySelector('.lang-pt');
+  var enBtn = toggle.querySelector('.lang-en');
+  var lang = localStorage.getItem('lang') || 'pt';
+  function apply(langCode) {
+    lang = langCode;
+    localStorage.setItem('lang', lang);
+    ptBtn.classList.toggle('active', lang === 'pt');
+    enBtn.classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang === 'en' ? 'en' : 'pt';
+    document.querySelectorAll('[data-en]').forEach(function (el) {
+      if (!el.hasAttribute('data-pt')) el.setAttribute('data-pt', el.textContent);
+      el.textContent = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-pt');
+    });
+  }
+  toggle.addEventListener('click', function () { apply(lang === 'pt' ? 'en' : 'pt'); });
+  if (lang === 'en') apply('en');
+})();
+</script>
+
 </body>
 </html>
