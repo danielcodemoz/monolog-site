@@ -1,4 +1,4 @@
-/*! Apoiar v1 \u2014 bot\u00e3o + janela de apoio (Daniel Marcos). Sem depend\u00eancias, sem servi\u00e7os externos. */
+/*! Apoiar v1.1 \u2014 bot\u00e3o + janela de apoio (Daniel Marcos). Sem depend\u00eancias, sem servi\u00e7os externos. */
 (function () {
   'use strict';
   if (window.__dpApoiar) return; window.__dpApoiar = 1;
@@ -58,16 +58,16 @@
   /* ---------- bot\u00e3o (light DOM, herda a fonte do site) ---------- */
   var css = document.createElement('style');
   css.textContent =
-    '.dp-apoiar-btn{display:inline-flex;align-items:center;gap:.4em;font:inherit;font-size:.9em;font-weight:600;line-height:1.2;' +
-    'padding:.45em .95em;border-radius:999px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;' +
+    'button.dp-apoiar-btn{display:inline-flex!important;align-items:center;gap:.4em;font:inherit;font-size:.9em;font-weight:600;line-height:1.2;' +
+    'padding:.45em .95em!important;border-radius:999px!important;border:1px solid currentColor!important;background:transparent;color:inherit;cursor:pointer;' +
     'opacity:.92;transition:opacity .15s,transform .15s,background .15s;white-space:nowrap;text-decoration:none;margin:0;vertical-align:middle;box-shadow:none}' +
-    '.dp-apoiar-btn:hover{opacity:1;transform:translateY(-1px);background:rgba(127,127,127,.12)}' +
+    'button.dp-apoiar-btn:hover{opacity:1;transform:translateY(-1px);background:rgba(127,127,127,.12)}' +
     '.dp-apoiar-btn:focus-visible{outline:2px solid ' + CFG.accent + ';outline-offset:2px}' +
-    '.dp-apoiar-btn svg{color:' + CFG.accent + ';flex:none}' +
-    '.dp-apoiar-btn.dp-link{border:0;padding:0;font-size:inherit;font-weight:inherit;background:none}' +
-    '.dp-apoiar-btn.dp-link:hover{background:none;text-decoration:underline}' +
-    '.dp-apoiar-float{position:fixed;left:16px;bottom:16px;z-index:2147483000;background:' + CFG.accent + ';color:#fff;border-color:transparent;box-shadow:0 6px 20px rgba(0,0,0,.25)}' +
-    '.dp-apoiar-float svg{color:#fff}.dp-apoiar-float:hover{background:' + CFG.accent + '}';
+    'button.dp-apoiar-btn svg{display:inline-block!important;color:' + CFG.accent + ';flex:none;width:1em;height:1em}' +
+    'button.dp-apoiar-btn.dp-link{border:0!important;padding:0!important;font-size:inherit;font-weight:inherit;background:none}' +
+    'button.dp-apoiar-btn.dp-link:hover{background:none;text-decoration:underline}' +
+    'button.dp-apoiar-float{position:fixed;left:16px;bottom:16px;z-index:2147483000;background:' + CFG.accent + ';color:#fff;border-color:transparent;box-shadow:0 6px 20px rgba(0,0,0,.25)}' +
+    'button.dp-apoiar-float svg{color:#fff}button.dp-apoiar-float:hover{background:' + CFG.accent + '}';
   (document.head || document.documentElement).appendChild(css);
 
   function makeBtn(variant) {
