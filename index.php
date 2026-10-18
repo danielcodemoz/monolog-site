@@ -246,8 +246,10 @@ $proofs = ['offline','aes','windows','account'];
     <p class="foot-line"><span data-en="Local journal for Windows. Your words stay where you wrote them."><?= e(t($DATA,'footer.line')) ?></span></p>
     <p class="foot-meta"><span data-en="A desktop program. Not a service."><?= e(t($DATA,'footer.credit')) ?></span></p>
     <p class="foot-meta"><?= e(t($DATA,'footer.url')) ?></p>
+    <p class="foot-meta" data-apoiar></p>
   </div>
 </footer>
+<script src="/assets/apoiar.js" data-theme="light" defer></script>
 
 <script>
 (function () {
