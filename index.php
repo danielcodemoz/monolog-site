@@ -73,6 +73,7 @@ $proofs = ['offline','aes','windows','account'];
       <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Toggle language">
         <span class="lang-pt active">PT</span><span class="lang-divider">/</span><span class="lang-en">EN</span>
       </button>
+      <span class="nav-apoiar" data-apoiar="nav"></span>
       <a class="btn" href="#descarregar" data-en="Download"><?= e(t($DATA,'nav.cta')) ?></a>
     </nav>
   </div>
