@@ -1,4 +1,4 @@
-/*! Apoiar v1.2 \u2014 bot\u00e3o + janela de apoio (Daniel Marcos). Sem depend\u00eancias, sem servi\u00e7os externos. */
+/*! Apoiar v1.3 \u2014 bot\u00e3o + janela de apoio (Daniel Marcos). Sem depend\u00eancias, sem servi\u00e7os externos. */
 (function () {
   'use strict';
   if (window.__dpApoiar) return; window.__dpApoiar = 1;
@@ -9,7 +9,6 @@
     theme: ds.theme || 'auto',          // auto | dark | light | default-dark | default-light
     accent: ds.accent || '#e11d48',
     page: 'https://danielpro.dev/apoiar/',
-    mpesa: '+258 84 556 6766', mpesaCopy: '845566766',
     name: 'Daniel Marcos Domingos Manganhe',
     paypalEmail: 'danielmarcos173@gmail.com',
     paypal: 'https://www.paypal.com/myaccount/transfer/homepage/pay',
@@ -20,14 +19,14 @@
   var TX = {en: {
     btn: 'Support', title: 'Enjoyed my work? Support the project',
     sub: 'Any amount helps keep these projects free and updated.',
-    mpesaHint: 'M-Pesa \u2192 Send money \u2192 this number', copy: 'Copy number', copied: 'Copied!',
+    mpesaHint: 'Scan the QR with the M-Pesa app', copied: 'Copied!',
     paypal: 'PayPal', paypalHint: 'PayPal \u2192 Send \u2192 this email', copyMail: 'Copy email', openPP: 'Open PayPal',
     kofi: 'Buy me a coffee on Ko-fi', kofiHint: 'Card or PayPal, from any country', close: 'Close',
     more: 'Support page', thanks: 'Thank you!'
   }, pt: {
     btn: 'Apoiar', title: 'Gostou do que fiz? Apoie o projeto',
     sub: 'Qualquer valor ajuda a manter estes projetos gratuitos e atualizados.',
-    mpesaHint: 'M-Pesa \u2192 Transferir dinheiro \u2192 este n\u00famero', copy: 'Copiar n\u00famero', copied: 'Copiado!',
+    mpesaHint: 'Leia o QR com a app M-Pesa', copied: 'Copiado!',
     paypal: 'PayPal', paypalHint: 'PayPal \u2192 Enviar \u2192 este email', copyMail: 'Copiar email', openPP: 'Abrir PayPal',
     kofi: 'Pagar um caf\u00e9 no Ko-fi', kofiHint: 'Cart\u00e3o ou PayPal, de qualquer pa\u00eds', close: 'Fechar',
     more: 'P\u00e1gina de apoio', thanks: 'Obrigado!'
@@ -67,6 +66,8 @@
     'button.dp-apoiar-btn svg{display:inline-block!important;color:' + CFG.accent + ';flex:none;width:1em;height:1em}' +
     'button.dp-apoiar-btn.dp-link{border:0!important;padding:0!important;font-size:inherit;font-weight:inherit;background:none}' +
     'button.dp-apoiar-btn.dp-link:hover{background:none;text-decoration:underline}' +
+    'button.dp-apoiar-btn.dp-nav{font-size:.85em;padding:.4em .8em!important;gap:.35em}' +
+    '@media (max-width:560px){button.dp-apoiar-btn.dp-nav{padding:0!important;width:34px;height:34px;justify-content:center}button.dp-apoiar-btn.dp-nav .dp-l{display:none}}' +
     'button.dp-apoiar-float{position:fixed;left:16px;bottom:16px;z-index:2147483000;background:' + CFG.accent + ';color:#fff;border-color:transparent;box-shadow:0 6px 20px rgba(0,0,0,.25)}' +
     'button.dp-apoiar-float svg{color:#fff}button.dp-apoiar-float:hover{background:' + CFG.accent + '}';
   (document.head || document.documentElement).appendChild(css);
@@ -74,7 +75,8 @@
   function makeBtn(variant) {
     var b = document.createElement('button');
     b.type = 'button';
-    b.className = 'dp-apoiar-btn' + (variant === 'link' ? ' dp-link' : '');
+    b.className = 'dp-apoiar-btn' + (variant === 'link' ? ' dp-link' : variant === 'nav' ? ' dp-nav' : '');
+    b.setAttribute('aria-label', T.btn);
     b.setAttribute('aria-haspopup', 'dialog');
     b.innerHTML = HEART + '<span class="dp-l">' + T.btn + '</span>';
     b.addEventListener('click', function (e) { e.preventDefault(); open(b); });
@@ -94,11 +96,12 @@
     '.sub{margin:0 0 16px;color:var(--mut);font-size:13.5px}' +
     '.card{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px}' +
     '.mp{display:flex;gap:14px;align-items:center}' +
-    '.qr{width:104px;height:104px;flex:none;border-radius:8px;background:#fff;padding:0;display:block}' +
+    '.qr{width:128px;height:128px;flex:none;border-radius:8px;background:#fff;padding:0;display:block}' +
     '.lab{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#e4002b}' +
     '.p.dk .lab{color:#ff5a6e}' +
     '.num{font-size:20px;font-weight:750;letter-spacing:.02em;margin:2px 0 0;white-space:nowrap}' +
-    '.nm{font-size:12.5px;color:var(--mut);margin:2px 0 8px}' +
+    '.nm{font-size:14px;font-weight:650;margin:4px 0 6px}' +
+    '.scan{font-size:13px;color:var(--mut)}' +
     '.hint{font-size:12px;color:var(--mut);margin-top:6px}' +
     'button,a.b{font:inherit;cursor:pointer;text-decoration:none}' +
     '.cp{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--bg);color:var(--fg);' +
@@ -117,7 +120,7 @@
     '.ov{position:fixed;inset:0;z-index:2147483646;background:rgba(2,6,23,.62);display:flex;align-items:center;justify-content:center;padding:16px;' +
     'opacity:0;transition:opacity .16s;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);overflow-y:auto}' +
     '.ov.on{opacity:1}.ov .p{box-shadow:0 24px 60px rgba(0,0,0,.35);transform:translateY(8px) scale(.98);transition:transform .16s;margin:auto}.ov.on .p{transform:none}' +
-    '@media (max-width:380px){.p{padding:18px}.qr{width:88px;height:88px}.num{font-size:18px}}' +
+    '@media (max-width:380px){.p{padding:18px}.qr{width:112px;height:112px}}' +
     '@media (prefers-reduced-motion:reduce){.ov,.ov .p,a.b{transition:none}}';
 
   function panelHTML(modal) {
@@ -126,8 +129,8 @@
       '<h2 id="dpa-t">' + HEART + '<span>' + T.title + '</span></h2>' +
       '<p class="sub">' + T.sub + '</p>' +
       '<div class="card mp">' + QR +
-        '<div><div class="lab">M-Pesa</div><div class="num">' + CFG.mpesa + '</div><div class="nm">' + CFG.name + '</div>' +
-        '<button class="cp" type="button">' + T.copy + '</button><div class="hint">' + T.mpesaHint + '</div></div></div>' +
+        '<div><div class="lab">M-Pesa</div><div class="nm">' + CFG.name + '</div>' +
+        '<div class="scan">' + T.mpesaHint + '</div></div></div>' +
       '<a class="b" href="' + CFG.kofi + '" target="_blank" rel="noopener"><span class="ic" style="background:#13c3ff">&#9749;</span>' +
         '<span><strong>' + T.kofi + '</strong><small>ko-fi.com/danielpro \u00b7 ' + T.kofiHint + '</small></span></a>' +
       '<div class="card pp"><span class="ic" style="background:#003087">P</span><div class="ppb"><strong>' + T.paypal + '</strong>' +
@@ -147,8 +150,6 @@
   }
 
   function wire(root) {
-    var cp = root.querySelector('.mp .cp');
-    if (cp) cp.addEventListener('click', function () { copyText(CFG.mpesaCopy, cp, T.copy); });
     var cm = root.querySelector('.cpm');
     if (cm) cm.addEventListener('click', function () { copyText(CFG.paypalEmail, cm, T.copyMail); });
   }

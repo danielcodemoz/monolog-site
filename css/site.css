@@ -162,3 +162,13 @@ footer .foot-line{flex:1;min-width:12rem}
 .lang-toggle .lang-pt.active,
 .lang-toggle .lang-en.active { opacity: 1; }
 .lang-toggle .lang-divider { opacity: 0.4; margin: 0 0.15rem; }
+/* Apoiar no cabeçalho (mobile) */
+@media (max-width:480px){
+  .nav-in{gap:.45rem}
+  .nav-links{gap:.35rem}
+  .nav-links .btn{padding:.5rem .7rem;font-size:.82rem}
+  .nav-links .lang-toggle{padding-left:.55rem;padding-right:.55rem}
+  .brand{gap:.45rem}
+  .brand img{width:32px;height:32px}
+  .nav-links button.dp-apoiar-btn.dp-nav{width:32px;height:32px}
+}
