@@ -1,4 +1,4 @@
-/*! Apoiar v1.1 \u2014 bot\u00e3o + janela de apoio (Daniel Marcos). Sem depend\u00eancias, sem servi\u00e7os externos. */
+/*! Apoiar v1.2 \u2014 bot\u00e3o + janela de apoio (Daniel Marcos). Sem depend\u00eancias, sem servi\u00e7os externos. */
 (function () {
   'use strict';
   if (window.__dpApoiar) return; window.__dpApoiar = 1;
@@ -11,7 +11,8 @@
     page: 'https://danielpro.dev/apoiar/',
     mpesa: '+258 84 556 6766', mpesaCopy: '845566766',
     name: 'Daniel Marcos Domingos Manganhe',
-    paypal: 'https://www.paypal.com/donate?business=danielmarcos173%40gmail.com&currency_code=USD',
+    paypalEmail: 'danielmarcos173@gmail.com',
+    paypal: 'https://www.paypal.com/myaccount/transfer/homepage/pay',
     kofi: 'https://ko-fi.com/danielpro'
   };
   var QR = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" class="qr" role="img" aria-label="QR M-Pesa"><path fill="#fff" d="M0 0h25v25h-25z"/><path class="qrline" stroke="#111" d="M2 2.5h7m2 0h4m1 0h7m-21 1h1m5 0h1m4 0h1m2 0h1m5 0h1m-21 1h1m1 0h3m1 0h1m1 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-21 1h1m1 0h3m1 0h1m4 0h1m2 0h1m1 0h3m1 0h1m-21 1h1m1 0h3m1 0h1m1 0h2m4 0h1m1 0h3m1 0h1m-21 1h1m5 0h1m1 0h1m2 0h2m1 0h1m5 0h1m-21 1h7m1 0h1m1 0h1m1 0h1m1 0h7m-12 1h2m-10 1h1m2 0h1m1 0h1m1 0h1m2 0h3m1 0h2m1 0h1m-16 1h1m4 0h2m2 0h2m2 0h1m1 0h2m-19 1h11m3 0h2m3 0h1m-21 1h1m2 0h2m2 0h3m1 0h2m2 0h2m1 0h1m-19 1h5m1 0h4m1 0h1m1 0h1m1 0h1m1 0h4m-13 1h2m1 0h1m1 0h3m2 0h1m-19 1h7m2 0h1m3 0h8m-21 1h1m5 0h1m4 0h1m4 0h1m3 0h1m-21 1h1m1 0h3m1 0h1m1 0h4m1 0h2m2 0h2m1 0h1m-21 1h1m1 0h3m1 0h1m5 0h5m2 0h2m-21 1h1m1 0h3m1 0h1m2 0h2m1 0h1m2 0h2m1 0h1m-19 1h1m5 0h1m1 0h1m1 0h3m4 0h1m2 0h1m-21 1h7m2 0h1m1 0h1m1 0h3m2 0h3"/></svg>';
@@ -20,15 +21,15 @@
     btn: 'Support', title: 'Enjoyed my work? Support the project',
     sub: 'Any amount helps keep these projects free and updated.',
     mpesaHint: 'M-Pesa \u2192 Send money \u2192 this number', copy: 'Copy number', copied: 'Copied!',
-    paypal: 'Donate with PayPal', paypalHint: 'Card or PayPal balance, from anywhere',
-    kofi: 'Buy me a coffee on Ko-fi', kofiHint: 'Paid through PayPal', close: 'Close',
+    paypal: 'PayPal', paypalHint: 'PayPal \u2192 Send \u2192 this email', copyMail: 'Copy email', openPP: 'Open PayPal',
+    kofi: 'Buy me a coffee on Ko-fi', kofiHint: 'Card or PayPal, from any country', close: 'Close',
     more: 'Support page', thanks: 'Thank you!'
   }, pt: {
     btn: 'Apoiar', title: 'Gostou do que fiz? Apoie o projeto',
     sub: 'Qualquer valor ajuda a manter estes projetos gratuitos e atualizados.',
     mpesaHint: 'M-Pesa \u2192 Transferir dinheiro \u2192 este n\u00famero', copy: 'Copiar n\u00famero', copied: 'Copiado!',
-    paypal: 'Doar com PayPal', paypalHint: 'Cart\u00e3o ou saldo PayPal, de qualquer pa\u00eds',
-    kofi: 'Pagar um caf\u00e9 no Ko-fi', kofiHint: 'Pago atrav\u00e9s do PayPal', close: 'Fechar',
+    paypal: 'PayPal', paypalHint: 'PayPal \u2192 Enviar \u2192 este email', copyMail: 'Copiar email', openPP: 'Abrir PayPal',
+    kofi: 'Pagar um caf\u00e9 no Ko-fi', kofiHint: 'Cart\u00e3o ou PayPal, de qualquer pa\u00eds', close: 'Fechar',
     more: 'P\u00e1gina de apoio', thanks: 'Obrigado!'
   }};
   var T = TX.pt;
@@ -107,6 +108,8 @@
     'a.b:hover{border-color:var(--ac);transform:translateY(-1px)}' +
     'a.b .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;color:#fff;font-weight:800;font-size:15px}' +
     'a.b strong{display:block;font-size:14.5px}a.b small{display:block;color:var(--mut);font-size:12px}' +
+    '.pp{display:flex;gap:12px;align-items:flex-start}.pp .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;color:#fff;font-weight:800;font-size:15px}' +
+    '.ppb strong{display:block;font-size:14.5px}.mail{font-weight:650;margin:2px 0 8px;word-break:break-all}.row{display:flex;gap:8px;flex-wrap:wrap}a.cp{text-decoration:none}' +
     '.x{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;border:0;background:transparent;color:var(--mut);font-size:22px;line-height:1}' +
     '.x:hover{background:var(--card);color:var(--fg)}' +
     '.ft{text-align:center;font-size:12.5px;margin-top:6px}.ft a{color:var(--mut)}.ft a:hover{color:var(--ac)}' +
@@ -125,16 +128,17 @@
       '<div class="card mp">' + QR +
         '<div><div class="lab">M-Pesa</div><div class="num">' + CFG.mpesa + '</div><div class="nm">' + CFG.name + '</div>' +
         '<button class="cp" type="button">' + T.copy + '</button><div class="hint">' + T.mpesaHint + '</div></div></div>' +
-      '<a class="b" href="' + CFG.paypal + '" target="_blank" rel="noopener"><span class="ic" style="background:#003087">P</span>' +
-        '<span><strong>' + T.paypal + '</strong><small>' + T.paypalHint + '</small></span></a>' +
       '<a class="b" href="' + CFG.kofi + '" target="_blank" rel="noopener"><span class="ic" style="background:#13c3ff">&#9749;</span>' +
         '<span><strong>' + T.kofi + '</strong><small>ko-fi.com/danielpro \u00b7 ' + T.kofiHint + '</small></span></a>' +
+      '<div class="card pp"><span class="ic" style="background:#003087">P</span><div class="ppb"><strong>' + T.paypal + '</strong>' +
+        '<div class="mail">' + CFG.paypalEmail + '</div><div class="row"><button class="cp cpm" type="button">' + T.copyMail + '</button>' +
+        '<a class="cp" href="' + CFG.paypal + '" target="_blank" rel="noopener">' + T.openPP + ' \u2197</a></div><div class="hint">' + T.paypalHint + '</div></div></div>' +
       (modal && location.hostname.replace(/^www\./, '') + location.pathname.replace(/\/$/, '') !== 'danielpro.dev/apoiar' ? '<div class="ft"><a href="' + CFG.page + '" target="_blank" rel="noopener">' + T.more + ' \u2192</a></div>' : '') +
       '</div>';
   }
 
-  function copyText(txt, btn) {
-    function done() { btn.textContent = T.copied; btn.classList.add('ok'); setTimeout(function () { btn.textContent = T.copy; btn.classList.remove('ok'); }, 1800); }
+  function copyText(txt, btn, label) {
+    function done() { btn.textContent = T.copied; btn.classList.add('ok'); setTimeout(function () { btn.textContent = label; btn.classList.remove('ok'); }, 1800); }
     if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(txt).then(done, fallback); } else fallback();
     function fallback() {
       var t = document.createElement('textarea'); t.value = txt; t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;left:-9999px;top:0';
@@ -143,8 +147,10 @@
   }
 
   function wire(root) {
-    var cp = root.querySelector('.cp');
-    if (cp) cp.addEventListener('click', function () { copyText(CFG.mpesaCopy, cp); });
+    var cp = root.querySelector('.mp .cp');
+    if (cp) cp.addEventListener('click', function () { copyText(CFG.mpesaCopy, cp, T.copy); });
+    var cm = root.querySelector('.cpm');
+    if (cm) cm.addEventListener('click', function () { copyText(CFG.paypalEmail, cm, T.copyMail); });
   }
 
   var host = null, lastFocus = null, prevOverflow = '';
