@@ -3,6 +3,13 @@
 :root{
   --cream:#F4EDE2;--paper:#C4B8A8;--brown:#6B5344;--teal:#3F5C45;
   --ink:#2c211c;--wood:#16100c;--deep:#3F5C45;
+  --dp-support-accent:#3F5C45;
+  --dp-support-bg:#F4EDE2;
+  --dp-support-fg:#2c211c;
+  --dp-support-muted:#6B5344;
+  --dp-support-line:#C4B8A8;
+  --dp-support-card:#efe6d8;
+  --dp-support-glow:rgba(63,92,69,.14);
   --serif:Fraunces,Palatino,"Palatino Linotype","Book Antiqua",serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,sans-serif;
   --max:1120px;

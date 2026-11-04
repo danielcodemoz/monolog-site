@@ -50,7 +50,8 @@ $proofs = ['offline','aes','windows','account'];
 <link rel="apple-touch-icon" href="/assets/apple-touch.png">
 <link rel="preload" href="/assets/fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/hero-3d.webp?v=2" as="image" fetchpriority="high">
-<link rel="stylesheet" href="/css/site.css?v=983a83ea">
+<link rel="stylesheet" href="/assets/support-modal/support-modal.css?v=1">
+<link rel="stylesheet" href="/css/site.css?v=983a83eb">
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -250,7 +251,7 @@ $proofs = ['offline','aes','windows','account'];
     <p class="foot-meta" data-apoiar></p>
   </div>
 </footer>
-<script src="/assets/apoiar.js?v=2.5.a3b8c9a8" data-theme="light" defer></script>
+<script src="/assets/support-modal/support-modal.js?v=1" data-variant="free" data-theme="light" defer></script>
 
 <script>
 (function () {
