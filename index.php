@@ -250,7 +250,7 @@ $proofs = ['offline','aes','windows','account'];
     <p class="foot-meta" data-apoiar></p>
   </div>
 </footer>
-<script src="/assets/apoiar.js?v=2.5.a3b8c9a8" data-theme="light" defer></script>
+<script data-accent="#3F5C45" data-variant="free" src="/assets/apoiar.js?v=2.6.rollout" data-theme="light" defer></script>
 
 <script>
 (function () {
