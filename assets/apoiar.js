@@ -1,4 +1,4 @@
-/*! Apoiar v2.5 \u2014 bot\u00e3o + janela de apoio (Daniel Marcos). Sem depend\u00eancias, sem servi\u00e7os externos. */
+/*! Apoiar v2.6 \u2014 bot\u00e3o + janela de apoio (Daniel Marcos). Paleta dark/light + variantes free/paid. Sem depend\u00eancias, sem servi\u00e7os externos. */
 (function () {
   'use strict';
   if (window.__dpApoiar) return; window.__dpApoiar = 1;
@@ -6,6 +6,7 @@
   var script = document.currentScript || {};
   var ds = script.dataset || {};
   var CFG = {
+    variant: ds.variant === 'paid' ? 'paid' : 'free',
     theme: ds.theme || 'auto',          // auto | dark | light | default-dark | default-light
     accent: ds.accent || '#e11d48',
     page: 'https://danielpro.dev/apoiar/',
@@ -17,11 +18,31 @@
     gumroad: 'https://danielprodev.gumroad.com/',
     liberapay: 'https://liberapay.com/danielmarcos'
   };
+
+  function accentRGB(hex) {
+    hex = String(hex || '#e11d48').replace('#', '').trim();
+    if (hex.length === 3) hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+    var n = parseInt(hex, 16);
+    if (isNaN(n)) n = 0xe11d48;
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+  var AR = accentRGB(CFG.accent);
+  var A = AR[0] + ',' + AR[1] + ',' + AR[2];
+  var glowSoft = 'rgba(' + A + ',.12)';
+  var glowMid = 'rgba(' + A + ',.22)';
+  var glowHot = 'rgba(' + A + ',.18)';
+  var hoverTint = 'rgba(' + A + ',.10)';
+  var hoverBorder = 'rgba(' + A + ',.55)';
+  var hoverBorderLt = 'rgba(' + A + ',.45)';
+  var hoverBgLt = 'rgba(' + A + ',.08)';
+
   var QR = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" class="qr" role="img" aria-label="QR M-Pesa"><path fill="#fff" d="M0 0h25v25h-25z"/><path class="qrline" stroke="#111" d="M2 2.5h7m2 0h4m1 0h7m-21 1h1m5 0h1m4 0h1m2 0h1m5 0h1m-21 1h1m1 0h3m1 0h1m1 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-21 1h1m1 0h3m1 0h1m4 0h1m2 0h1m1 0h3m1 0h1m-21 1h1m1 0h3m1 0h1m1 0h2m4 0h1m1 0h3m1 0h1m-21 1h1m5 0h1m1 0h1m2 0h2m1 0h1m5 0h1m-21 1h7m1 0h1m1 0h1m1 0h1m1 0h7m-12 1h2m-10 1h1m2 0h1m1 0h1m1 0h1m2 0h3m1 0h2m1 0h1m-16 1h1m4 0h2m2 0h2m2 0h1m1 0h2m-19 1h11m3 0h2m3 0h1m-21 1h1m2 0h2m2 0h3m1 0h2m2 0h2m1 0h1m-19 1h5m1 0h4m1 0h1m1 0h1m1 0h1m1 0h4m-13 1h2m1 0h1m1 0h3m2 0h1m-19 1h7m2 0h1m3 0h8m-21 1h1m5 0h1m4 0h1m4 0h1m3 0h1m-21 1h1m1 0h3m1 0h1m1 0h4m1 0h2m2 0h2m1 0h1m-21 1h1m1 0h3m1 0h1m5 0h5m2 0h2m-21 1h1m1 0h3m1 0h1m2 0h2m1 0h1m2 0h2m1 0h1m-19 1h1m5 0h1m1 0h1m1 0h3m4 0h1m2 0h1m-21 1h7m2 0h1m1 0h1m1 0h3m2 0h3"/></svg>';
 
   var TX = {en: {
     btn: 'Support', title: 'Enjoyed my work? Support the project',
-    sub: 'Any amount helps keep these projects free and updated.',
+    subFree: 'Any amount helps keep these projects free and updated.',
+    subPaid: 'Your support helps develop new features and keep the project evolving.',
+    notePaid: 'Voluntary support \u2014 it does not replace a plan subscription.',
     mpesaHint: 'Scan the QR with the M-Pesa app', copied: 'Copied!',
     paypal: 'PayPal', paypalHint: 'PayPal \u2192 Send \u2192 this email', copyMail: 'Copy email', openPP: 'Open PayPal',
     kofi: 'Ko-fi', kofiHint: 'Card or PayPal',
@@ -31,7 +52,9 @@
     close: 'Close', more: 'Support page', thanks: 'Thank you!', enlargeQr: 'Enlarge QR'
   }, pt: {
     btn: 'Apoiar', title: 'Gostou do que fiz? Apoie o projeto',
-    sub: 'Qualquer valor ajuda a manter estes projetos gratuitos e atualizados.',
+    subFree: 'Qualquer valor ajuda a manter estes projetos gratuitos e atualizados.',
+    subPaid: 'O seu apoio ajuda a desenvolver novas funcionalidades e a manter o projeto em evolu\u00e7\u00e3o.',
+    notePaid: 'Apoio volunt\u00e1rio \u2014 n\u00e3o substitui a subscri\u00e7\u00e3o de um plano.',
     mpesaHint: 'Leia o QR com a app M-Pesa', copied: 'Copiado!',
     paypal: 'PayPal', paypalHint: 'PayPal \u2192 Enviar \u2192 este email', copyMail: 'Copiar email', openPP: 'Abrir PayPal',
     kofi: 'Ko-fi', kofiHint: 'Cart\u00e3o ou PayPal',
@@ -105,17 +128,28 @@
   /* ---------- painel (shadow DOM, isolado do CSS do site) ---------- */
   var PANEL_CSS =
     ':host{all:initial}' +
-    '.p{--bg:#fefefe;--fg:#0d0d0f;--mut:#5a5a68;--line:#e8e3e9;--card:#faf8fb;--ac:' + CFG.accent + ';--glow:rgba(225,29,72,.12);' +
-    'font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,Inter,Arial,sans-serif;color:var(--fg);background:var(--bg);' +
+    '.p{--bg:#fefefe;--fg:#0d0d0f;--mut:#5a5a68;--line:#e8e3e9;--card:#faf8fb;--ac:' + CFG.accent + ';--glow:' + glowSoft + ';' +
+    'font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,Inter,Arial,sans-serif;color:var(--fg);' +
+    'background:radial-gradient(120% 60% at 0% 0%,' + glowSoft.replace(',.12)', ',.08)') + ',transparent 60%),linear-gradient(180deg,#ffffff,#f7f5f8);' +
+    'border:1px solid rgba(15,13,21,.06);box-shadow:inset 0 1px 0 rgba(255,255,255,.9);' +
     'border-radius:16px;box-sizing:border-box;width:100%;max-width:390px;padding:18px;position:relative;text-align:left}' +
-    '.p.dk{--bg:#0f0d15;--fg:#f5f3f7;--mut:#a8a3b0;--line:#2a2430;--card:#1a1621;--glow:rgba(225,29,72,.22)}' +
+    '.p:not(.dk) .card,.p:not(.dk) a.b{background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(250,248,251,.9));border-color:rgba(15,13,21,.08);box-shadow:0 1px 3px rgba(15,13,21,.04),inset 0 1px 0 rgba(255,255,255,.8)}' +
+    '.p:not(.dk) a.b:hover{border-color:' + hoverBorderLt + ';background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(255,255,255,.9));box-shadow:0 6px 18px ' + glowSoft + '}' +
+    '.p:not(.dk) .cp{background:rgba(255,255,255,.7);border-color:rgba(15,13,21,.1)}.p:not(.dk) .cp:hover{border-color:' + hoverBorder + ';background:' + hoverBgLt + '}' +
+    '.p.dk{--bg:#131316;--fg:#f4f4f5;--mut:#a1a1aa;--line:rgba(255,255,255,.08);--card:#1c1c20;--glow:' + glowMid + ';' +
+    'background:radial-gradient(120% 60% at 0% 0%,' + glowSoft + ',transparent 60%),linear-gradient(180deg,#18181c,#111114);border:1px solid rgba(255,255,255,.07);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}' +
+    '.p.dk .card,.p.dk a.b{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border-color:rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 2px 6px rgba(0,0,0,.25)}' +
+    '.p.dk a.b:hover{border-color:' + hoverBorder + ';background:linear-gradient(180deg,' + hoverTint + ',rgba(255,255,255,.02));box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 6px 18px ' + glowHot + '}' +
+    '.p.dk .cp{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12)}.p.dk .cp:hover{border-color:' + hoverBorder + ';background:' + hoverBgLt + '}' +
+    '.p.dk h2 svg{color:var(--ac)}.p.dk .x:hover{background:rgba(255,255,255,.08)}' +
     '.p *{box-sizing:border-box}.p:focus{outline:none}' +
     'h2{margin:0 30px 4px 0;font-size:17.5px;line-height:1.2;font-weight:750;display:flex;gap:7px;align-items:center}' +
     'h2 svg{color:var(--ac);flex:none;filter:drop-shadow(0 0 8px var(--glow))}' +
-    '.sub{margin:0 0 14px;color:var(--mut);font-size:12.5px}' +
+    '.sub{margin:0 0 10px;color:var(--mut);font-size:12.5px}' +
+    '.note{margin:0 0 14px;color:var(--mut);font-size:11.5px;padding:8px 10px;border-radius:10px;border:1px dashed var(--line);background:transparent}' +
     '.card{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:12px;margin-bottom:8px;' +
     'box-shadow:0 1px 3px rgba(0,0,0,.04)}' +
-    '.p.dk .card{box-shadow:0 2px 8px rgba(0,0,0,.25);border-color:rgba(225,29,72,.08)}' +
+    
     '.mp{display:flex;gap:12px;align-items:center}' +
     '.qr{width:80px;height:80px;flex:none;border-radius:8px;background:#fff;padding:0;display:block;cursor:pointer;' +
     'transition:transform .15s,box-shadow .15s;border:2px solid transparent}' +
@@ -161,7 +195,8 @@
     return '<div class="p" role="' + (modal ? 'dialog' : 'region') + '" aria-modal="' + (modal ? 'true' : 'false') + '" aria-labelledby="dpa-t">' +
       (modal ? '<button class="x" type="button" aria-label="' + T.close + '">&times;</button>' : '') +
       '<h2 id="dpa-t">' + HEART + '<span>' + T.title + '</span></h2>' +
-      '<p class="sub">' + T.sub + '</p>' +
+      '<p class="sub">' + (CFG.variant === 'paid' ? T.subPaid : T.subFree) + '</p>' +
+      (CFG.variant === 'paid' ? '<p class="note">' + T.notePaid + '</p>' : '') +
       '<div class="card mp">' + qrBtn +
         '<div><div class="lab"><span class="ic">' + LOGOS.mpesa + '</span><span>M-Pesa</span></div><div class="nm">' + CFG.name + '</div>' +
         '<div class="scan">' + T.mpesaHint + '</div></div></div>' +
@@ -300,7 +335,7 @@
     lang(); var ls = document.querySelectorAll('.dp-apoiar-btn .dp-l');
     for (var k = 0; k < ls.length; k++) ls[k].textContent = T.btn;
   }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
-  window.DPApoiar = { open: open, close: close, init: init };
+  window.DPApoiar = { open: open, close: close, init: init, setVariant: function (v) { CFG.variant = v === 'paid' ? 'paid' : 'free'; } };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
   if (/#apoiar$/.test(location.hash)) setTimeout(open, 300);
 })();
